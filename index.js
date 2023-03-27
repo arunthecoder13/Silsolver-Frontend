@@ -491,7 +491,6 @@ function saveEquipmentDetails() {
     close_record: $("input[name=closerecord]:checked").val(),
   };
 
-  console.log(obj);
   var getType = $("#EquipmentdetailmodalType").val();
   if (getType == "Add") {
     $.ajax({
