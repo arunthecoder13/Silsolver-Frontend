@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SilSolver</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+      href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  </head>
+  <body>
+    <!-- Image and text -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #b0c7ab;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">SilSolver</a>
+      </div>
+    </nav>
+
+    <div class="container mt-3">
+      <ul class="nav nav-pills nav-fill gap-2 p-1 small  rounded-5
+        shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color:
+        var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-dark);
+        --bs-nav-pills-link-active-bg: var(--bs-white);background-color: #6eab64;">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active rounded-5" id="home-tab2"
+            data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Equip
+            List</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-5" id="profile-tab2"
+            data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Trip</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-5" id="contact-tab2"
+            data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Bypass</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-5" id="contact-tab2"
+            data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Test
+            Due</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-5" id="contact-tab2"
+            data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Maintenance</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-5" id="contact-tab2"
+            data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Analyze</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="container mt-4">
+      <button type="button" class="btn border-success" data-toggle="modal"
+        data-target="#UploadDocModal" style="float: right; background-color: #f0f7ef;">Upload Doc</button>
+      <br><br>
+    </div>
+
+    <div class="container mt-3">
+      <table id="dtHorizontalVerticalExample" class="table table-sm mt-2" cellspacing="0"
+        width="100%" border="1">
+        <thead>
+          <tr>
+            <th>Actions</th>
+            <th>Manufacturer</th>
+            <th>Model #</th>
+            <th>Version Options</th>
+            <th>Equip Description</th>
+            <th>Special Instructions</th>
+            <th>Software Rev #</th>
+            <th>Firmware Rev #</th>
+            <th>Utility Software Rev #</th>
+            <th>Useful Life (Yr)</th>
+            <th>Obsolescence Date</th>
+            <th>Status</th>
+            <th>Date Approved</th>
+            <th>Area Approval</th>
+            <th>Approved By</th>
+            <th>Documents</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+      id="UploadDocModal">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content" style="background-color: #f0f7ef;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="UploadDocModalTitle"></h5>
+              <input type="hidden" id="UploadDocModalType">
+              <button type="button" class="btn-close" data-dismiss="modal"
+                aria-label="Close" onclick="closeUploadDocModal()">
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="UploadDocModalform">
+                <input type="hidden" id="editEquipmentId">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="manufacturer">Manufacturer <span style="color: red;"> *</span></label>
+                    <input type="text" class="form-control" id="manufacturer"
+                      placeholder="" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="model">Model#<span style="color: red;"> *</span></label>
+                    <input type="text" class="form-control"
+                      id="model" placeholder="" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="versionoptions">Version Options</label>
+                    <input type="number" class="form-control"
+                      id="versionoptions" placeholder="">
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="form-group col-md-12">
+                    <label for="equipdescription">Equip Description<span style="color: red;"> *</span></label>
+                    <textarea class="form-control"
+                      id="equipdescription"
+                      placeholder="" rows="3" required></textarea>
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="form-group col-md-12">
+                    <label for="specialinstructions">Special Instructions<span style="color: red;"> *</span></label>
+                    <textarea class="form-control"
+                      id="specialinstructions"
+                      placeholder="" rows="3" required></textarea>
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="form-group col-md-4">
+                    <label for="softwarerev">Software Rev#</label>
+                      <select id="softwarerev" class="form-control">
+                        <option value="A" selected>A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                      </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="firmwarerev">Firmware Rev#</label>
+                    <input type="text" class="form-control"
+                      id="firmwarerev" placeholder="">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="utilitysoftwarerev">Utility Software Rev#</label>
+                    <input type="text" class="form-control"
+                      id="utilitysoftwarerev" placeholder="">
+                  </div>
+                </div>
+
+
+                <div class="row mt-2">
+                  <div class="form-group col-md-4">
+                    <label for="usefullife">Useful Life(Yr)</label>
+                    <input type="number" class="form-control" id="usefullife"
+                      placeholder="">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="oobsolescencedate">Obsolescence Date</label>
+                    <input type="date" class="form-control" name="oobsolescencedate"
+                      id="oobsolescencedate">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="status">Status</label>
+                    <select id="status" class="form-control">
+                      <option value="Approved" selected>Approved</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Retired">Retired</option>
+                      <option value="Rejected">Rejected</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="row mt-2">
+                  
+                  <div class="form-group col-md-4">
+                    <label for="dateapproved">Date Approved</label>
+                    <input type="date" class="form-control"
+                      id="dateapproved" placeholder="">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="areaapproval">Area Approval</label>
+                    <select id="areaapproval" class="form-control">
+                      <option value="Company" selected>Company</option>
+                      <option value="Location">Location</option>
+                      <option value="System">System</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="approvedby">Approved By</label>
+                    <input type="text" class="form-control"
+                      id="approvedby" placeholder="">
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="form-group col-md-4">
+                    <label for="documentname">Document Name</label>
+                    <input type="text" class="form-control"
+                      id="documentname" placeholder="">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="documentlink">Document Link</label>
+                    <input type="url" class="form-control"
+                      id="documentlink" placeholder="">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <div style="display: none;" id="validationmessage">
+                <p style="margin-bottom: 0px;">All fields marked with an <span style="color: red;"> *</span> are required</p>
+              </div>
+              <button type="button" class="btn btn-secondary"
+                data-dismiss="modal" onclick="closeUploadDocModal()">Close</button>
+              <button type="button" class="btn" style="background-color: #6eab64; color: white;" onclick="AddorUpdateDoc()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+      id="Equipmentdetailmodal">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content" style="background-color: #f0f7ef;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Add/Update
+                Doc</h5>
+              <button type="button" class="btn-close" data-dismiss="modal"
+                aria-label="Close" onclick="closeEquipmentdetailmodal()">
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="Equipmentdetailform">
+                <input type="hidden" id="EquipmentdetailmodalType">
+                <input type="hidden" id="EquipmentdetailmodalId">
+
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <div class="row">
+                      <div class="form-group col-md-12">
+                        <label for="applicationrestrictions">Application
+                          restrictions?</label>
+                        <input type="text" class="form-control"
+                          id="applicationrestrictions"
+                          placeholder="">
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label for="classificationmet">Hazardous area classification met?</label>
+                        <input type="checkbox" class="custom-control-input" id="classificationmet_yes" name="classificationmet" value="true">
+                        <label class="custom-control-label" for="classificationmet_yes">Yes</label>
+                        <input type="checkbox" class="custom-control-input" id="classificationmet_no" name="classificationmet" value="false">
+                        <label class="custom-control-label" for="classificationmet_no">No</label>
+                      </div>
+                    </div>
+    
+                    <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label for="otherapprovals">Other approvals</label>
+                        <input type="text" class="form-control"
+                          id="otherapprovals"
+                          placeholder="">
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label for="manufacturerquality">Manufacturer quality good</label>
+                        <input type="checkbox" class="custom-control-input" name="manufacturerquality"
+                          id="manufacturerquality_yes" value="true">
+                        <label class="custom-control-label">Yes</label>
+                        <input type="checkbox" class="custom-control-input" name="manufacturerquality"
+                          id="manufacturerquality_no" value="false">
+                        <label class="custom-control-label">No</label>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label for="manufacturerrecommendations">Installation match
+                          manufacturer recommendations?</label>
+                        <input type="checkbox" class="custom-control-input"
+                          id="manufacturerrecommendations_yes" value="true" name="manufacturerrecommendations">
+                        <label class="custom-control-label">Yes</label>
+                        <input type="checkbox" class="custom-control-input"
+                          id="manufacturerrecommendations_no" value="false" name="manufacturerrecommendations">
+                        <label class="custom-control-label">No</label>
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="form-group col-md-12">
+                        <label for="manufacturerrecommendationsno">If no, justify
+                          why?</label>
+                        <input type="text" class="form-control"
+                          id="manufacturerrecommendationsno"
+                          placeholder="">
+                      </div>
+                    </div>
+    
+                    <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label for="maintenanceplan">Maintenance plan agree with
+                          manufacturer recommendations?</label>
+                        <input type="checkbox" class="custom-control-input"
+                          id="maintenanceplan_yes" value="true" name="maintenanceplan">
+                        <label class="custom-control-label">Yes</label>
+                        <input type="checkbox" class="custom-control-input"
+                          id="maintenanceplan_no" value="false" name="maintenanceplan">
+                        <label class="custom-control-label">No</label>
+                      </div>
+                    </div>
+                    <div class="row mt-1">
+                      <div class="form-group col-md-12">
+                        <label for="maintenanceplanno">If no, justify
+                          why?</label>
+                        <input type="text" class="form-control"
+                          id="maintenanceplanno"
+                          placeholder="">
+                      </div>
+                    </div>
+    
+                    <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label for="special_instructions">Special Instructions</label>
+                        <input type="text" class="form-control"
+                          id="special_instructions"
+                          placeholder="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <div class="row">
+                      <div class="form-group col-md-12">
+                        <label for="approvaltext">Approval based on</label>
+                        <textarea class="form-control"
+                          id="approvaltext"
+                          placeholder="" rows="3"></textarea>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label for="prioruseinapp">Prior Use in application</label>
+                        <input type="text" class="form-control" id="prioruseinapp" placeholder="">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="asofdate">As of Date</label>
+                        <input type="date" class="form-control"
+                          id="asofdate"
+                          placeholder="">
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label for="obsolescencestatus">Obsolescence status</label>
+                        <select id="obsolescencestatus" class="form-control">
+                          <option value="Approved" selected>Approved</option>
+                          <option value="Pending">Pending</option>
+                          <option value="Retired">Retired</option>
+                          <option value="Rejected">Rejected</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="obsolescence_date">Obsolescence Date</label>
+                        <input type="date" class="form-control"
+                          id="obsolescence_date"
+                          placeholder="">
+                      </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label for="usefullifeyr">Useful life (yr)</label>
+                        <input type="number" class="form-control"
+                          id="usefullifeyr"
+                          placeholder="">
+                      </div>
+                    </div>
+    
+                    <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label for="comments">Comments</label>
+                        <input type="text" class="form-control"
+                          id="comments"
+                          placeholder="">
+                      </div>
+                    </div>
+    
+                    <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label for="recommendations">Recommendations</label>
+                        <input type="text" class="form-control"
+                          id="recommendations"
+                          placeholder="">
+                      </div>
+                    </div>
+    
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label for="ereviewedby">Reviewed by</label>
+                        <input type="text" class="form-control"
+                          id="ereviewedby"
+                          placeholder="">
+                      </div>  
+                    </div>
+    
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label for="erevieweddate">Reviewed Date</label>
+                        <input type="date" class="form-control"
+                          id="erevieweddate"
+                          placeholder="">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <div class="closerecord">
+                          <input type="checkbox" class="custom-control-input"
+                          id="closerecord_yes" name="closerecord" value="true">
+                        <label class="custom-control-label" for="no">Close record</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary"
+                data-dismiss="modal" onclick="closeEquipmentdetailmodal()">Close</button>
+              <button type="button" class="btn" style="background-color: #6eab64; color: white;" onclick="saveEquipmentDetails()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="confirm-delete-label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirm-delete-label">Are you sure you want to delete?</h5>
+            <input type="hidden" id="deleteEquipmentId">
+            <button type="button" class="btn-close" data-dismiss="modal"
+                aria-label="Close" onclick="closedeleteEquipmentdetailmodal()">
+              </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closedeleteEquipmentdetailmodal()">Cancel</button>
+            <button type="button" class="btn btn-danger" id="confirm" onclick="deleteEquipment()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+    
+
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript"
+      src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript"
+      src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="index.js"></script>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"></script>
+  </body>
+</html>
