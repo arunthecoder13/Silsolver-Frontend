@@ -59,3 +59,21 @@ table tr:hover {
 table tr {
   border-bottom: 1px solid #ccc;
 }
+
+.rowdescription{
+  white-space: normal;
+  min-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px;
+}
+
+.specialinstructiontext{
+  white-space: normal;
+  min-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px;
+}
