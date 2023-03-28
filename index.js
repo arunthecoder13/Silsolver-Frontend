@@ -58,14 +58,18 @@ function getEquipments() {
             )
           );
           row.append(
-            $("<td onclick=getEquipmentsDetails(" + equipment.id + ")>").text(
-              equipment.equipment_description
-            )
+            $(
+              "<td onclick=getEquipmentsDetails(" +
+                equipment.id +
+                ") class='rowdescription'>"
+            ).text(equipment.equipment_description)
           );
           row.append(
-            $("<td onclick=getEquipmentsDetails(" + equipment.id + ")>").text(
-              equipment.special_instructions
-            )
+            $(
+              "<td onclick=getEquipmentsDetails(" +
+                equipment.id +
+                ") class='specialinstructiontext'>"
+            ).text(equipment.special_instructions)
           );
 
           row.append(
@@ -147,6 +151,7 @@ function closeUploadDocModal() {
   $("#UploadDocModalTitle").text("Add Doc");
   $("#UploadDocModalType").val("Add");
   $("#UploadDocModal").modal("hide");
+  $("#addmoresubmitmessage").hide();
   getEquipments();
 }
 
@@ -236,20 +241,24 @@ function deleteEquipment() {
 
 function AddorUpdateDoc() {
   if (validateForm("UploadDocModalform")) {
+    $("#validationmessage").hide();
+    $("#addmoresubmitmessage").hide();
     var obj = {
       manufacturer: $("#manufacturer").val(),
       model: $("#model").val(),
       version: $("#versionoptions").val(),
       equipment_description: $("#equipdescription").val(),
       special_instructions: $("#specialinstructions").val(),
-      software_rev: $("#softwarerev").val(),
+      software_rev:
+        $("#softwarerev").val() == "null" ? null : $("#softwarerev").val(),
       firmware_rev: $("#firmwarerev").val(),
       utility_software: $("#utilitysoftwarerev").val(),
       useful_life: $("#usefullife").val(),
       obsolescence_date: $("#oobsolescencedate").val(),
-      status: $("#status").val(),
+      status: $("#status").val() == "null" ? null : $("#status").val(),
       date_approved: $("#dateapproved").val(),
-      area_approval: $("#areaapproval").val(),
+      area_approval:
+        $("#areaapproval").val() == "null" ? null : $("#areaapproval").val(),
       approved_by: $("#approvedby").val(),
       documents_name: $("#documentname").val(),
       documents_link: $("#documentlink").val(),
@@ -261,6 +270,7 @@ function AddorUpdateDoc() {
         method: "POST",
         data: obj,
         success: function (response) {
+          $("#addmoresubmitmessage").show();
           toastr.success("Equipment added successfully");
           var form = document.querySelector("#UploadDocModalform");
           form.reset();
@@ -315,6 +325,7 @@ function validateForm(formId) {
   for (var i = 0; i < requiredFields.length; i++) {
     if (requiredFields[i].value.trim() === "") {
       toastr.error("Please fill out all required fields.");
+      $("#addmoresubmitmessage").hide();
       $("#validationmessage").show();
       return false;
     }
@@ -422,36 +433,46 @@ function saveEquipmentDetails() {
         ? null
         : $("#EquipmentdetailmodalId").val(),
     application_restriction: $("#applicationrestrictions").val(),
-    hazardous_area_classification_met: $(
-      "input[name=classificationmet]:checked"
-    ).val(),
+    hazardous_area_classification_met:
+      $("input[name=classificationmet]:checked").val() == undefined
+        ? null
+        : $("input[name=classificationmet]:checked").val(),
     other_approvals: $("#otherapprovals").val(),
-    manufactural_quality_good: $(
-      "input[name=manufacturerquality]:checked"
-    ).val(),
-    installation_match_manufacturer_recommendations: $(
-      "input[name=manufacturerrecommendations]:checked"
-    ).val(),
+    manufactural_quality_good:
+      $("input[name=manufacturerquality]:checked").val() == undefined
+        ? null
+        : $("input[name=manufacturerquality]:checked").val(),
+    installation_match_manufacturer_recommendations:
+      $("input[name=manufacturerrecommendations]:checked").val() == undefined
+        ? null
+        : $("input[name=manufacturerrecommendations]:checked").val(),
     installation_match_manufacturer_recommendations_if_no: $(
       "#manufacturerrecommendationsno"
     ).val(),
-    maintainance_plan_agree_with_manufacturer_recommendations: $(
-      "input[name=maintenanceplan]:checked"
-    ).val(),
+    maintainance_plan_agree_with_manufacturer_recommendations:
+      $("input[name=maintenanceplan]:checked").val() == undefined
+        ? null
+        : $("input[name=maintenanceplan]:checked").val(),
     maintainance_plan_agree_with_manufacturer_recommendations_if_no:
       $("#maintenanceplanno").val(),
     special_instructions: $("#special_instructions").val(),
     approval_based_on: $("#approvaltext").val(),
     prior_use_application: $("#prioruseinapp").val(),
     as_of_date: $("#asofdate").val(),
-    obsolescence_status: $("#obsolescencestatus").val(),
+    obsolescence_status:
+      $("#obsolescencestatus").val() == "null"
+        ? null
+        : $("#obsolescencestatus").val(),
     obsolescence_date: $("#obsolescence_date").val(),
     useful_life: $("#usefullifeyr").val(),
     comments: $("#comments").val(),
     recommendations: $("#recommendations").val(),
     reviewed_by: $("#ereviewedby").val(),
     reviewed_date: $("#erevieweddate").val(),
-    close_record: $("input[name=closerecord]:checked").val(),
+    close_record:
+      $("input[name=closerecord]:checked").val() == undefined
+        ? null
+        : $("input[name=closerecord]:checked").val(),
   };
 
   // var obj = {
