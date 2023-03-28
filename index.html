@@ -72,8 +72,8 @@
             <th>Manufacturer</th>
             <th>Model #</th>
             <th>Version Options</th>
-            <th>Equip Description</th>
-            <th>Special Instructions</th>
+            <th class="rowdescription">Equip Description</th>
+            <th class="specialinstructiontext">Special Instructions</th>
             <th>Software Rev #</th>
             <th>Firmware Rev #</th>
             <th>Utility Software Rev #</th>
@@ -148,7 +148,8 @@
                   <div class="form-group col-md-4">
                     <label for="softwarerev">Software Rev#</label>
                       <select id="softwarerev" class="form-control">
-                        <option value="A" selected>A</option>
+                        <option value="null" selected>Select..</option>
+                        <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
                         <option value="D">D</option>
@@ -181,7 +182,8 @@
                   <div class="form-group col-md-4">
                     <label for="status">Status</label>
                     <select id="status" class="form-control">
-                      <option value="Approved" selected>Approved</option>
+                      <option value="null" selected>Select..</option>
+                      <option value="Approved">Approved</option>
                       <option value="Pending">Pending</option>
                       <option value="Retired">Retired</option>
                       <option value="Rejected">Rejected</option>
@@ -200,7 +202,8 @@
                   <div class="form-group col-md-4">
                     <label for="areaapproval">Area Approval</label>
                     <select id="areaapproval" class="form-control">
-                      <option value="Company" selected>Company</option>
+                      <option value="null" selected>Select..</option>
+                      <option value="Company">Company</option>
                       <option value="Location">Location</option>
                       <option value="System">System</option>
                     </select>
@@ -229,6 +232,9 @@
             <div class="modal-footer">
               <div style="display: none;" id="validationmessage">
                 <p style="margin-bottom: 0px;">All fields marked with an <span style="color: red;"> *</span> are required</p>
+              </div>
+              <div style="display: none;" id="addmoresubmitmessage">
+                <p style="margin-bottom: 0px;">You can Add more data and click submit. Click on Close when you're done.</p>
               </div>
               <button type="button" class="btn btn-secondary"
                 data-dismiss="modal" onclick="closeUploadDocModal()">Close</button>
@@ -375,7 +381,8 @@
                       <div class="form-group col-md-6">
                         <label for="obsolescencestatus">Obsolescence status</label>
                         <select id="obsolescencestatus" class="form-control">
-                          <option value="Approved" selected>Approved</option>
+                          <option value="null" selected>Select..</option>
+                          <option value="Approved">Approved</option>
                           <option value="Pending">Pending</option>
                           <option value="Retired">Retired</option>
                           <option value="Rejected">Rejected</option>
