@@ -1,7 +1,13 @@
 var apiUrl; // declare apiUrl globally
 var dataTable = $("#dtHorizontalVerticalExample").DataTable({
   scrollX: true,
-  scrollY: 500,
+  scrollY: 400,
+  columnDefs: [
+    {
+      targets: [0],
+      orderable: false,
+    },
+  ],
 });
 $(document).ready(function () {
   apiUrl = "http://ec2-3-110-30-86.ap-south-1.compute.amazonaws.com:8000/";
@@ -134,7 +140,13 @@ function getEquipments() {
 
       dataTable = $("#dtHorizontalVerticalExample").DataTable({
         scrollX: true,
-        scrollY: 500,
+        scrollY: 400,
+        columnDefs: [
+          {
+            targets: [0],
+            orderable: false,
+          },
+        ],
       });
 
       $(".dataTables_length").addClass("bs-select");
