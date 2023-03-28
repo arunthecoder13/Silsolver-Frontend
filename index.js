@@ -201,7 +201,7 @@ function editEquipmentModalShow(id) {
         $("#firmwarerev").val(data.firmware_rev);
         $("#utilitysoftwarerev").val(data.utility_software);
         $("#usefullife").val(data.useful_life);
-        $("#obsolescencedate").val(data.obsolescence_date);
+        $("#oobsolescencedate").val(data.obsolescence_date);
         $("#status").val(data.status);
         $("#dateapproved").val(data.date_approved);
         $("#areaapproval").val(data.area_approval);
@@ -486,43 +486,6 @@ function saveEquipmentDetails() {
         ? null
         : $("input[name=closerecord]:checked").val(),
   };
-
-  // var obj = {
-  //   id:
-  //     $("#EquipmentdetailmodalId").val() == 0
-  //       ? null
-  //       : $("#EquipmentdetailmodalId").val(),
-  //   application_restriction: $("#applicationrestrictions").val(),
-  //   hazardous_area_classification_met: $(
-  //     "input[name=classificationmet]:checked"
-  //   ).val(),
-  //   other_approvals: $("#otherapprovals").val(),
-  //   manufactural_quality_good: $(
-  //     "input[name=manufacturerquality]:checked"
-  //   ).val(),
-  //   installation_match_manufacturer_recommendations: $(
-  //     "input[name=manufacturerrecommendations]:checked"
-  //   ).val(),
-  //   installation_match_manufacturer_recommendations_if_no: $(
-  //     "#manufacturerrecommendationsno"
-  //   ).val(),
-  //   maintainance_plan_agree_with_manufacturer_recommendations: $(
-  //     "input[name=maintenanceplan]:checked"
-  //   ).val(),
-  //   maintainance_plan_agree_with_manufacturer_recommendations_if_no: false,
-  //   special_instructions: $("#special_instructions").val(),
-  //   approval_based_on: $("#approvaltext").val(),
-  //   prior_use_application: $("#prioruseinapp").val(),
-  //   as_of_date: $("#asofdate").val(),
-  //   obsolescence_status: $("#obsolescencestatus").val(),
-  //   obsolescence_date: $("#obsolescence_date").val(),
-  //   useful_life: $("#usefullifeyr").val(),
-  //   comments: $("#comments").val(),
-  //   recommendations: $("#recommendations").val(),
-  //   reviewed_by: $("#ereviewedby").val(),
-  //   reviewed_date: $("#erevieweddate").val(),
-  //   close_record: $("input[name=closerecord]:checked").val(),
-  // };
 
   var getType = $("#EquipmentdetailmodalType").val();
   if (getType == "Add") {
